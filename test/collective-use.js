@@ -6,7 +6,7 @@ class ProperUseClass {use(){} disuse(){}};
 class ImproperUseClass {use(){}};
 
 describe('CollectiveUse', function() {
-  describe('#constructor(...args)', function() {
+  describe('constructor(...args)', function() {
     const make = (...args) => () => new CollectiveUse(...args);
 
     const tests = [
@@ -34,7 +34,7 @@ describe('CollectiveUse', function() {
     });
   });
 
-  describe('#isUsable', function() {
+  describe('.isUsable', function() {
     const useful1 = new LimitedUse(() => {}, 2);
     const useful2 = new LimitedUse(() => {}, 1);
     const collective = new CollectiveUse(useful1, useful2);
@@ -56,7 +56,7 @@ describe('CollectiveUse', function() {
     });
   });
 
-  describe('#isDisused', function() {
+  describe('.isDisused', function() {
     it('should be true when the set is disused', function() {
       const collective = new CollectiveUse();
       assert(!collective.isDisused);
@@ -65,7 +65,7 @@ describe('CollectiveUse', function() {
     });
   });
 
-  describe('#has(obj)', function() {
+  describe('.has(obj)', function() {
     const useful1 = new LimitedUse();
     const useful2 = new LimitedUse();
     const useful3 = new LimitedUse();
@@ -80,7 +80,7 @@ describe('CollectiveUse', function() {
     })
   });
 
-  describe('#add(...args)', function() {
+  describe('.add(...args)', function() {
     const make = (...args) => () => new CollectiveUse(...args);
 
     const tests = [
@@ -102,7 +102,7 @@ describe('CollectiveUse', function() {
     ];
   });
 
-  describe('#remove(obj)', function() {
+  describe('.remove(obj)', function() {
     const useful1 = new LimitedUse();
     const useful2 = new LimitedUse();
     const collective = new CollectiveUse(useful1);
@@ -116,7 +116,7 @@ describe('CollectiveUse', function() {
     });
   });
 
-  describe('#clear()', function() {
+  describe('.clear()', function() {
     const useful1 = new LimitedUse();
     const useful2 = new LimitedUse();
     const collective = new CollectiveUse(useful1, useful2);
@@ -130,7 +130,7 @@ describe('CollectiveUse', function() {
     });
   });
 
-  describe('#use(...args)', function() {
+  describe('.use(...args)', function() {
     let useful1;
     let useful2;
     const promise1 = new Promise(res => {
@@ -151,7 +151,7 @@ describe('CollectiveUse', function() {
     });
   });
 
-  describe('#useSync(...args)', function() {
+  describe('.useSync(...args)', function() {
     let useful1;
     let useful2;
     useful1 = new LimitedUse(arg => {
@@ -169,7 +169,7 @@ describe('CollectiveUse', function() {
     });
   });
 
-  describe('#disuse()', function() {
+  describe('.disuse()', function() {
     const useful1 = new LimitedUse(() => {});
     const useful2 = new LimitedUse(() => {}, 2);
     const collective = new CollectiveUse(useful1, useful2);

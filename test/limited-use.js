@@ -4,7 +4,7 @@ import LimitedUse from '../src/limited-use';
 const usageSimple = () => {};
 
 describe('LimitedUse', function() {
-  describe('#constructor()', function() {
+  describe('constructor()', function() {
     const make = (...args) => () => new LimitedUse(...args);
 
     const tests = [
@@ -29,7 +29,7 @@ describe('LimitedUse', function() {
     });
   });
 
-  describe('#isUsable, #isDisused', function() {
+  describe('.isUsable, .isDisused', function() {
     const make = (n, ...args) => {
       const limitedUse = new LimitedUse(...args);
       for (let i = 0; i < n; i++) {
@@ -53,8 +53,8 @@ describe('LimitedUse', function() {
     });
   });
 
-  describe('#use()', function() {
-    it('should cause #isUsable to be false after it is called more times than the limit', function() {
+  describe('.use()', function() {
+    it('should cause .isUsable to be false after it is called more times than the limit', function() {
       const limit = 3;
       const limitedUse = new LimitedUse(usageSimple, limit);
       for (let i = 0; i < limit - 1; i++) {
@@ -66,8 +66,8 @@ describe('LimitedUse', function() {
     });
   });
 
-  describe('#disuse()', function() {
-    it('should immediately cause #isUsable to be false', function() {
+  describe('.disuse()', function() {
+    it('should immediately cause .isUsable to be false', function() {
       const limitedUse = new LimitedUse(usageSimple, 4);
       assert(limitedUse.isUsable);
       limitedUse.disuse();
