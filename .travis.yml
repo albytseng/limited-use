@@ -2,4 +2,4 @@ language: node_js
 node_js: [node]
 
 after_success:
-  - 'npm i coveralls@3 && nyc report --reporter=text-lcov | coveralls'
+  - 'yarn report-coverage'

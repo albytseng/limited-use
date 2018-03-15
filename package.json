@@ -34,6 +34,7 @@
   },
   "scripts": {
     "build": "webpack-cli --mode production",
+    "report-coverage": "nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js",
     "test": "cross-env BABEL_ENV=test nyc --reporter=text mocha --require babel-register test"
   }
 }
