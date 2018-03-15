@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const merge = require('webpack-merge');
@@ -22,13 +21,10 @@ const commonConfig = {
 };
 
 module.exports = [
-  // UMD module
   {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'limited-use.js',
-      library: _.camelCase('[name]'),
-      libraryTarget: 'umd',
     },
   },
 ].map(outputConfig => merge(outputConfig, commonConfig));
