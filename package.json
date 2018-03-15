@@ -1,6 +1,6 @@
 {
   "name": "limited-use",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A lightweight abstraction for functions that should only be invoked a limited number of times.",
   "author": {
     "name": "Alby Tseng",
@@ -41,7 +41,7 @@
     "instrument": false
   },
   "scripts": {
-    "build": "webpack-cli --mode production",
+    "build": "webpack-cli --mode development",
     "test": "cross-env BABEL_ENV=test nyc --reporter=text --reporter=html mocha --require babel-register test"
   },
   "dependencies": {
