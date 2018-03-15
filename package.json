@@ -30,11 +30,18 @@
     "mocha": "^5.0.4",
     "nyc": "^11.6.0",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.11"
+    "webpack-cli": "^2.0.11",
+    "webpack-merge": "^4.1.2"
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
   },
   "scripts": {
     "build": "webpack-cli --mode production",
-    "report-coverage": "nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js",
-    "test": "cross-env BABEL_ENV=test nyc --reporter=text mocha --require babel-register test"
+    "test": "cross-env BABEL_ENV=test nyc --reporter=text --reporter=html mocha --require babel-register test"
   }
 }
