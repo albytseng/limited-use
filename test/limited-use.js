@@ -3,7 +3,24 @@ import LimitedUse from '../src/limited-use';
 
 const usageSimple = () => {};
 
+const makeGetAttr = (attr, n, ...args) => {
+  const limitedUse = new LimitedUse(...args);
+  for (let i = 0; i < n; i++) {
+    limitedUse.use();
+  }
+  return limitedUse[attr];
+};
+
 describe('LimitedUse', function() {
+  describe('static .hasLimitedUse(obj)', function() {
+    it('should return true when `obj` is a `LimitedUse` instance', function() {
+      assert(LimitedUse.hasLimitedUse(new LimitedUse()));
+    });
+    it('should return false when `obj` is not a `LimitedUse` instance', function() {
+      assert(!LimitedUse.hasLimitedUse('hello'));
+    });
+  });
+
   describe('constructor()', function() {
     const make = (...args) => () => new LimitedUse(...args);
 
@@ -29,26 +46,30 @@ describe('LimitedUse', function() {
     });
   });
 
-  describe('.isUsable, .isDisused', function() {
-    const make = (n, ...args) => {
-      const limitedUse = new LimitedUse(...args);
-      for (let i = 0; i < n; i++) {
-        limitedUse.use();
-      }
-      return limitedUse.isUsable;
-    };
-
+  describe('.isUsable', function() {
     const tests = [
-      {args: [0, usageSimple], toAssert: {isUsable: true, isDisused: false}},
-      {args: [1, usageSimple], toAssert: {isUsable: false, isDisused: true}},
-      {args: [2, usageSimple], toAssert: {isUsable: false, isDisused: true}},
+      {args: ['isUsable', 0, usageSimple], toAssert: true},
+      {args: ['isUsable', 1, usageSimple], toAssert: false},
+      {args: ['isUsable', 2, usageSimple], toAssert: false},
     ];
 
     tests.forEach(function(test) {
-      it(`should be opposites: isUsable should be ${test.toAssert} for a 1-use object after ${test.args[0]} uses`, function() {
-        const isUsableResult = make(...test.args);
-        assert.strictEqual(isUsableResult, test.toAssert.isUsable);
-        assert.strictEqual(!isUsableResult, test.toAssert.isDisused);
+      it(`should be ${test.toAssert} for a 1-use object after ${test.args[1]} uses`, function() {
+        assert.strictEqual(makeGetAttr(...test.args), test.toAssert);
+      });
+    });
+  });
+
+  describe('.isDisused', function() {
+    const tests = [
+      {args: ['isDisused', 0, usageSimple], toAssert: false},
+      {args: ['isDisused', 1, usageSimple], toAssert: true},
+      {args: ['isDisused', 2, usageSimple], toAssert: true},
+    ];
+
+    tests.forEach(function(test) {
+      it(`should be ${test.toAssert} for a 1-use object after ${test.args[1]} uses`, function() {
+        assert.strictEqual(makeGetAttr(...test.args), test.toAssert);
       });
     });
   });

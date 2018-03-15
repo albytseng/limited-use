@@ -50,7 +50,7 @@ class CollectiveUse {
    * @returns {boolean} True if `useful` is a member.
    */
   has(useful) {
-    return !_getIsDisusedState(this) && _getUsefulCollection(this).has(useful);
+    return _getUsefulCollection(this).has(useful);
   }
 
   /**
@@ -69,7 +69,7 @@ class CollectiveUse {
    * @returns {boolean} True if the removal was successful, else false.
    */
   remove(useful) {
-    if (_getIsDisusedState(this)) return;
+    if (_getIsDisusedState(this)) return false;
     return _getUsefulCollection(this).delete(useful);
   }
 
