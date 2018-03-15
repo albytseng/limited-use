@@ -1,7 +1,7 @@
 import assert from 'assert';
 import isUseful from '../src/is-useful';
 
-describe(`#isUseful(obj)`, function() {
+describe(`isUseful(obj)`, function() {
   it('should return false when `obj` has no `use()`', function() {
     assert(!isUseful(new class {disuse(){}}()));
   });
