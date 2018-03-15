@@ -203,7 +203,7 @@ describe('CollectiveUse', function() {
     useful1 = new LimitedUse(arg => {
       assert(arg, 'hello');
       assert(useful2.isUsable);
-    }, 2);
+    });
     useful2 = new LimitedUse(arg => {
       assert(arg, 'hello');
       assert(!useful1.isUsable);
