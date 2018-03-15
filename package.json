@@ -1,0 +1,33 @@
+{
+  "name": "limited-use",
+  "version": "0.0.1",
+  "description": "A convenient abstraction for functions that should only be invoked a limited number of times.",
+  "author": {
+    "name": "Alby Tseng",
+    "email": "albytseng@gmail.com"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/albytseng/limited-use.git",
+  "bugs": {
+    "url": "https://github.com/albytseng/limited-use/issues"
+  },
+  "readmeFilename": "README.md",
+  "private": false,
+  "main": "dist/index.js",
+  "module": "src/index.js",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "cross-env": "^5.1.4",
+    "mocha": "^5.0.4",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11"
+  },
+  "scripts": {
+    "build": "webpack-cli --mode production",
+    "test": "cross-env BABEL_ENV=test mocha --require babel-register"
+  }
+}
