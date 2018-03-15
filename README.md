@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/albytseng/limited-use.svg?branch=master)](https://travis-ci.org/albytseng/limited-use) [![dependencies Status](https://david-dm.org/albytseng/limited-use/status.svg)](https://david-dm.org/albytseng/limited-use) [![Coverage Status](https://coveralls.io/repos/github/albytseng/limited-use/badge.svg?branch=master)](https://coveralls.io/github/albytseng/limited-use?branch=master)
 
-A convenient abstraction for functions that should only be invoked a limited number of times.
+A lightweight abstraction for functions that should only be invoked a limited number of times.
 
 ## Usage
 
@@ -23,7 +23,7 @@ import {LimitedUse, CollectiveUse} from 'limited-use'
 const usables = new CollectiveUse()
 usables.add(
   new LimitedUse(() => console.log('eat a donut')),
-  new LimitedUse((x) => console.log(`think about her ${x}`), 365)
+  new LimitedUse(x => console.log(`think about her ${x}`), 365)
 )
 
 usables.use('smile') // 'eat a donut', 'think about her smile'

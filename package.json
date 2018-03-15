@@ -1,7 +1,7 @@
 {
   "name": "limited-use",
   "version": "0.0.4",
-  "description": "A convenient abstraction for functions that should only be invoked a limited number of times.",
+  "description": "A lightweight abstraction for functions that should only be invoked a limited number of times.",
   "author": {
     "name": "Alby Tseng",
     "email": "albytseng@gmail.com"
