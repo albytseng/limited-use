@@ -1,4 +1,4 @@
-/** Holds `usageFn`s for `LimitedUse` instances.  */
+/** Holds `usageFn`s for `LimitedUse` instances. */
 const _usageFns = new WeakMap();
 const _setUsageFn = WeakMap.prototype.set.bind(_usageFns);
 const _getUsageFn = WeakMap.prototype.get.bind(_usageFns);

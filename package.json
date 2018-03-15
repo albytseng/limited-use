@@ -19,6 +19,7 @@
   ],
   "main": "dist/limited-use.js",
   "module": "src/index.js",
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -30,7 +31,7 @@
     "mocha": "^5.0.4",
     "nyc": "^11.6.0",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.11",
+    "webpack-cli": "^2.0.12",
     "webpack-merge": "^4.1.2"
   },
   "nyc": {
@@ -41,11 +42,7 @@
     "instrument": false
   },
   "scripts": {
-    "build": "webpack-cli --mode development",
+    "build": "webpack-cli --mode production",
     "test": "cross-env BABEL_ENV=test nyc --reporter=text --reporter=html mocha --require babel-register test"
-  },
-  "dependencies": {
-    "es6-set": "^0.1.5",
-    "es6-weak-map": "^2.0.2"
   }
 }

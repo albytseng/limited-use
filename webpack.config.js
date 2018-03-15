@@ -25,6 +25,10 @@ module.exports = [
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'limited-use.js',
+      library: 'limitedUse',
+      libraryTarget: 'umd',
+      libraryExport: 'default',
+      globalObject: 'typeof self !== \'undefined\' ? self : this',
     },
   },
 ].map(outputConfig => merge(outputConfig, commonConfig));
