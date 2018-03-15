@@ -4,6 +4,33 @@
 
 A convenient abstraction for functions that should only be invoked a limited number of times.
 
+## Example
+
+```javascript
+import {LimitedUse} from 'limited-use'
+
+const usable = new LimitedUse(() => console.log('take a nap'), 1)
+
+usable.use() // 'take a nap'
+usable.use() // no effect
+```
+
+With multiple `LimitedUse`s, use them as a single group with `CollectiveUse`:
+
+```javascript
+import {LimitedUse, CollectiveUse} from 'limited-use'
+
+const usables = new CollectiveUse()
+usables.add(
+  new LimitedUse(() => console.log('eat a donut')),
+  new LimitedUse(() => console.log('think about her'), 2)
+)
+
+usables.use() // 'eat a donut', 'think about her'
+usables.use() // 'think about her'
+usables.use() // no effect
+```
+
 ## Installation
 
 Install using [yarn](https://yarnpkg.com/en/):
