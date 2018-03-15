@@ -4,26 +4,31 @@
 
 A convenient abstraction for functions that should only be invoked a limited number of times.
 
+## Example
+
 ```javascript
 import {LimitedUse} from 'limited-use'
 
-const usable = new LimitedUse(callback, 1);
-usable.use() // callback is called.
-usable.use() // No effect; callback is not called.
+const usable = new LimitedUse(() => console.log('take a nap'), 1)
+
+usable.use() // 'take a nap'
+usable.use() // no effect
 ```
 
 With multiple `LimitedUse`s, use them as a single group with `CollectiveUse`:
 
 ```javascript
-import {LimitedUse, CollectiveUse} from 'limited-use';
+import {LimitedUse, CollectiveUse} from 'limited-use'
 
-const usable1 = new LimitedUse(callback1);
-const usable2 = new LimitedUse(callback2, 2);
-const usables = new CollectiveUse(usable1, usable2);
+const usables = new CollectiveUse()
+usables.add(
+  new LimitedUse(() => console.log('eat a donut')),
+  new LimitedUse(() => console.log('think about her'), 2)
+)
 
-usables.use() // All callbacks are called.
-usables.use() // Only callback2 is called.
-usables.use() // No effect; no callbacks are called.
+usables.use() // 'eat a donut', 'think about her'
+usables.use() // 'think about her'
+usables.use() // no effect
 ```
 
 ## Installation
