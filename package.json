@@ -1,6 +1,6 @@
 {
   "name": "limited-use",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A convenient abstraction for functions that should only be invoked a limited number of times.",
   "author": {
     "name": "Alby Tseng",
@@ -13,7 +13,8 @@
   },
   "readmeFilename": "README.md",
   "private": false,
-  "main": "dist/index.js",
+  "files": ["dist", "src"],
+  "main": "dist/limited-use.js",
   "module": "src/index.js",
   "devDependencies": {
     "babel-core": "^6.26.0",
