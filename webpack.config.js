@@ -28,6 +28,8 @@ module.exports = [
       library: 'limitedUse',
       libraryTarget: 'umd',
       libraryExport: 'default',
+
+      // HACK: Fix webpack global object incorrectly defaulting to 'window'
       globalObject: 'typeof self !== \'undefined\' ? self : this',
     },
   },
