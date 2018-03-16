@@ -1,6 +1,6 @@
 {
   "name": "limited-use",
-  "version": "0.0.14",
+  "version": "1.0.1",
   "description": "A lightweight abstraction for functions that should only be invoked a limited number of times.",
   "author": {
     "name": "Alby Tseng",
@@ -19,6 +19,10 @@
   ],
   "main": "dist/limited-use.js",
   "module": "src/index.js",
+  "scripts": {
+    "build": "webpack-cli --mode production",
+    "test": "cross-env BABEL_ENV=test nyc --reporter=text --reporter=html mocha --require babel-register test"
+  },
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -41,8 +45,15 @@
     "sourceMap": false,
     "instrument": false
   },
-  "scripts": {
-    "build": "webpack-cli --mode production",
-    "test": "cross-env BABEL_ENV=test nyc --reporter=text --reporter=html mocha --require babel-register test"
-  }
+  "keywords": [
+    "runs",
+    "executions",
+    "callback",
+    "finite",
+    "bounded",
+    "quota",
+    "countdown",
+    "single use",
+    "one off"
+  ]
 }
