@@ -162,24 +162,15 @@ describe('CollectiveUse', function() {
   });
 
   describe('.use(...args)', function() {
-    let useful1;
-    let useful2;
-    let useful3;
-    const promise1 = new Promise(res => {
-      useful1 = new LimitedUse(arg => setTimeout(() => res(arg)), 2);
-    });
-    const promise2 = new Promise(res => {
-      useful2 = new LimitedUse(arg => setTimeout(() => res(arg)));
-    });
-    const promise3 = new Promise(res => {
-      useful3 = new LimitedUse(arg => setTimeout(() => res(arg)), 3);
-    });
+    const useful1 = new LimitedUse(arg => arg, 2);
+    const useful2 = new LimitedUse(arg => arg);
+    const useful3 = new LimitedUse(arg => arg, 3);
     const collective = new CollectiveUse(useful1, useful2);
 
     it('should consume one use with same `args` on each member asynchronously', function() {
-      collective.use('hello');
-      return Promise.all([promise1, promise2]).then(results => {
-        results.forEach(r => assert.strictEqual(r, 'hello'));
+      const prom = collective.use('hello');
+      return prom.then(vals => {
+        vals.forEach(v => assert(v === 'hello'));
         assert(useful1.isUsable);
         assert(!useful2.isUsable);
       });
@@ -188,14 +179,49 @@ describe('CollectiveUse', function() {
     it('should have no effect when this set is disused', function() {
       collective.add(useful3);
       collective.disuse();
-      collective.use('hello');
-      const delayed = new Promise((res) => setTimeout(res('bye'), 50));
-      return Promise.race([promise3, delayed]).then(result => {
-        assert.strictEqual(result, 'bye');
+      const prom = collective.use('hello');
+      return prom.catch(val => {
+        assert(val === 'disused');
         assert(!useful3.isUsable);
       });
-    })
+    });
   });
+  //
+  // describe('.use(...args)', function() {
+  //   let useful1;
+  //   let useful2;
+  //   let useful3;
+  //   const promise1 = new Promise(res => {
+  //     useful1 = new LimitedUse(arg => setTimeout(() => res(arg)), 2);
+  //   });
+  //   const promise2 = new Promise(res => {
+  //     useful2 = new LimitedUse(arg => setTimeout(() => res(arg)));
+  //   });
+  //   const promise3 = new Promise(res => {
+  //     useful3 = new LimitedUse(arg => setTimeout(() => res(arg)), 3);
+  //   });
+  //   const collective = new CollectiveUse(useful1, useful2);
+  //
+  //   it('should consume one use with same `args` on each member asynchronously', function() {
+  //     collective.use('hello');
+  //     return Promise.all([promise1, promise2]).then(results => {
+  //       results.forEach(r => assert.strictEqual(r, 'hello'));
+  //       assert(useful1.isUsable);
+  //       assert(!useful2.isUsable);
+  //     });
+  //   });
+  //
+  //   it('should have no effect when this set is disused', function() {
+  //     collective.add(useful3);
+  //     collective.disuse();
+  //     collective.use('hello');
+  //     const delayed = new Promise((res) => setTimeout(res('bye'), 50));
+  //     return Promise.race([promise3, delayed]).then(result => {
+  //       assert.strictEqual(result, 'bye');
+  //       assert(!useful3.isUsable);
+  //     });
+  //   })
+  // });
 
   describe('.useSync(...args)', function() {
     let useful1;

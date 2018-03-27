@@ -60,13 +60,13 @@ class LimitedUse {
   /**
    * Calls `usageFn` if it is still usable.
    * @param {...*} [args] Arbitrary arguments to pass to `usageFn`.
-   * @returns {void}
+   * @returns {Promis<*>} A promise resolving to the return value of `usageFn`.
    */
   use(...args) {
     const usageLimit = _getUsageLimit(this);
-    if (usageLimit <= 0) return;
+    if (usageLimit <= 0) return Promise.reject('disused');
     _setUsageLimit(this, usageLimit - 1);
-    _getUsageFn(this)(...args);
+    return new Promise(res => res(_getUsageFn(this)(...args)));
   }
 
   /**

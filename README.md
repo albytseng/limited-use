@@ -54,7 +54,7 @@ $ npm i limited-use
   - `callback` - The function to limit in use. Any arguments passed to `use()` will be passed to this function.
   - `limit` - The maximum number of times the call can be called. Optional, default 1.
 - __`.use(...args)`__
-  - Calls `callback(...args)`.
+  - Calls `callback(...args)` and returns an immediately resolved promise of its return value.
 - __`.disuse()`__
   - After this function is called, any future calls to `use()` will have no effect.
 - __`.isUsable`__
@@ -67,7 +67,9 @@ $ npm i limited-use
 - __`constructor(...usables)`__
   - `usables` - Any number of objects that have `.use()` and `.disuse()` methods.
 - __`.use(...args)`__
-  - Calls `use(...args)` (to be executed asynchronously) on all `usables` added to this collection.
+  - Calls `use(...args)` (to be executed asynchronously) on all `usables` added to this collection. Returns a promise that resolves to an array of each call's return value.
+- __`.useSync(...args)`__
+  - Calls `use(...args)` synchronously on all `usables` added to this collection. Returns an array of each call's return value.
 - __`.disuse()`__
   - After this function is called, this collection is marked as disused and `disuse()` is called on all `usables` that had been added.
 - __`.isUsable`__

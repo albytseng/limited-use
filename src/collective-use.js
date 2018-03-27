@@ -86,26 +86,24 @@ class CollectiveUse {
    * Asynchronously executes the `use()` method of every member of this
    * `CollectiveUse` instance.
    * @param {...*} [args] Arbitrary arguments to pass to `use()`.
-   * @returns {void}
+   * @returns {Promise<*[]>} The fulfilled return values of member `use()`s.
    */
   use(...args) {
-    if (_getIsDisusedState(this)) return;
-    for (const useful of _getUsefulCollection(this)) {
-      setTimeout(() => useful.use(...args));
-    }
+    if (_getIsDisusedState(this)) return Promise.reject('disused');
+    return Promise.all(
+      Array.from(_getUsefulCollection(this)).map(u => u.use(...args))
+    );
   }
 
   /**
    * Synchronously executes the `use()` method of every member of this
    * `CollectiveUse` instance.
    * @param {...*} [args] Arbitrary arguments to pass to `use()`.
-   * @returns {void}
+   * @returns {*[]} The return values of member `use()`s.
    */
   useSync(...args) {
-    if (_getIsDisusedState(this)) return;
-    for (const useful of _getUsefulCollection(this)) {
-      useful.use(...args);
-    }
+    if (_getIsDisusedState(this)) return [];
+    return Array.from(_getUsefulCollection(this)).map(u => u.use(...args));
   }
 
   /**

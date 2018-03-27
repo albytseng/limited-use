@@ -75,15 +75,22 @@ describe('LimitedUse', function() {
   });
 
   describe('.use()', function() {
+    it('should perform a noop if no arguments are given', function() {
+      return new LimitedUse().use().then(val => assert(!val));
+    });
+
     it('should cause .isUsable to be false after it is called more times than the limit', function() {
       const limit = 3;
-      const limitedUse = new LimitedUse(usageSimple, limit);
+      const limitedUse = new LimitedUse(x => x + 5, limit);
       for (let i = 0; i < limit - 1; i++) {
         limitedUse.use();
         assert(limitedUse.isUsable);
       }
-      limitedUse.use();
-      assert(!limitedUse.isUsable);
+
+      return limitedUse.use(2).then(val => {
+        assert(!limitedUse.isUsable);
+        assert(val === 7);
+      });
     });
   });
 
@@ -93,6 +100,7 @@ describe('LimitedUse', function() {
       assert(limitedUse.isUsable);
       limitedUse.disuse();
       assert(!limitedUse.isUsable);
+      return limitedUse.use().catch(val => assert(val === 'disused'));
     });
   });
 });
