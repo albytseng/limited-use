@@ -1,6 +1,6 @@
 # limited-use
 
-[![Build Status](https://img.shields.io/travis/albytseng/limited-use.svg)](https://travis-ci.org/albytseng/limited-use) [![Coverage Status](https://img.shields.io/coveralls/github/albytseng/limited-use/master.svg)](https://coveralls.io/github/albytseng/limited-use?branch=master) [![dependencies Status](https://img.shields.io/david/albytseng/limited-use.svg)](https://david-dm.org/albytseng/limited-use) [![npm Version](https://img.shields.io/npm/v/limited-use.svg)](https://www.npmjs.com/package/limited-use)
+[![Build Status](https://img.shields.io/travis/albytseng/limited-use.svg)](https://travis-ci.org/albytseng/limited-use) [![Coverage Status](https://img.shields.io/coveralls/github/albytseng/limited-use/master.svg)](https://coveralls.io/github/albytseng/limited-use?branch=master) [![Inline Docs](http://inch-ci.org/github/albytseng/limited-use.svg?branch=master&style=shields)](http://inch-ci.org/github/albytseng/limited-use) [![dependencies Status](https://img.shields.io/david/albytseng/limited-use.svg)](https://david-dm.org/albytseng/limited-use) [![npm Version](https://img.shields.io/npm/v/limited-use.svg)](https://www.npmjs.com/package/limited-use)
 
 A lightweight abstraction for functions that should only be invoked a limited number of times.
 
