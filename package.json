@@ -1,6 +1,6 @@
 {
   "name": "limited-use",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A lightweight abstraction for functions that should only be invoked a limited number of times.",
   "author": {
     "name": "Alby Tseng",
